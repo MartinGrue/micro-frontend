@@ -8,6 +8,7 @@ module.exports = {
       name: "products",
       filename: "remoteEntry.js",
       exposes: { "./ProductsIndex": "./src/index" },
+      shared: ["faker"],
     }),
     new htmlWebpackPlugin({ template: "./public/index.html" }),
   ],
