@@ -7,7 +7,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "products",
       filename: "remoteEntry.js",
-      exposes: { "./ProductsIndex": "./src/index" },
+      exposes: { "./ProductsIndex": "./src/bootstrap.js" },
       shared: ["faker"],
     }),
     new htmlWebpackPlugin({ template: "./public/index.html" }),
