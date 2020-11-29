@@ -1,5 +1,5 @@
 import React from "react";
-import MerketingApp from "./components/MerketingApp";
+import MerketingApp from "./components/MerketingApp"
 export default () => {
   return (
     <div>

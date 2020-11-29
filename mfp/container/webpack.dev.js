@@ -3,12 +3,19 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const baseConfig = require("./webpack.base");
 const packageJson = require("./package.json");
+const paths = require("./paths");
 
 const devConfig = {
+  entry: {
+    main: "./src/index",
+  },
   mode: "development",
   output: {
-    publicPath: "http://localhost:1088/",
+    path: paths.build,
+    filename: "[name].bundle.js",
+    publicPath: "/",
   },
+
   devServer: {
     port: 1088,
     historyApiFallback: {
@@ -16,16 +23,22 @@ const devConfig = {
     },
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name: "container",
-      filename: "remoteEntry.js",
-      remotes: {
-        marketing: "marketing@http://localhost:1081/remoteEntry.js",
-      },
-      shared: packageJson.dependencies,
-    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      filename: "index.html", // output file
+    }),
+
+    new ModuleFederationPlugin({
+      name: "container",
+
+      filename: "remoteEntry.js",
+      // library: { type: "var", name: "container" },
+
+      remotes: {
+        marketing: "marketing@http://localhost:1081/remoteEntry.js",
+        // marketing: "marketing",
+      },
+      shared: packageJson.dependencies,
     }),
   ],
 };
