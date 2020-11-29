@@ -1,24 +1,16 @@
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { ModuleFederationPlugin } = require("webpack").container;
 const baseConfig = require("./webpack.base");
 const packageJson = require("./package.json");
-const paths = require("./paths");
 
-const domain = process.env.PRODUCTION_DOMAIN
 const prodConfig = {
-  entry: {
-    main: "./src/index",
-  },
-  mode: "development",
-  output: {
-    path: paths.build,
-    filename: "[name].bundle.js",
-    publicPath: "/",
-  },
-
+  mode: "production",
+  // output: {
+  //   publicPath: 'http://localhost:1081/',
+  // },
   devServer: {
-    port: 1088,
+    port: 1081,
     historyApiFallback: {
       index: "index.html",
     },
@@ -28,16 +20,12 @@ const prodConfig = {
       template: "./public/index.html",
       filename: "index.html", // output file
     }),
-
     new ModuleFederationPlugin({
-      name: "container",
-
+      name: "marketing",
       filename: "remoteEntry.js",
-      // library: { type: "var", name: "container" },
 
-      remotes: {
-        marketing: `marketing@http://${domain}:1081/remoteEntry.js`,
-        // marketing: "marketing",
+      exposes: {
+        "./bootstrap": "./src/bootstrap",
       },
       shared: packageJson.dependencies,
     }),
