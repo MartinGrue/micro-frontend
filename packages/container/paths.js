@@ -4,4 +4,4 @@ module.exports = {
   src: path.resolve(__dirname, "/src"),
   build: path.resolve(__dirname, "dist"),
 };
-console.log("test run action17");
+console.log("test run action18");
