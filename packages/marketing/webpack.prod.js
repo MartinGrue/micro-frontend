@@ -6,9 +6,10 @@ const packageJson = require("./package.json");
 
 const prodConfig = {
   mode: "production",
-  // output: {
-  //   publicPath: 'http://localhost:1081/',
-  // },
+  output: {
+    filename: "[name].[contenthash].js",
+    publicPath: "/marketing/latest/",
+  },
   devServer: {
     port: 1081,
     historyApiFallback: {

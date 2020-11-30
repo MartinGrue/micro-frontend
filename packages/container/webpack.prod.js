@@ -36,7 +36,7 @@ const prodConfig = {
       // library: { type: "var", name: "container" },
 
       remotes: {
-        marketing: `marketing@http://${domain}:1081/remoteEntry.js`,
+        marketing: `marketing@http://${domain}/marketing/latest/remoteEntry.js`,
         // marketing: "marketing",
       },
       shared: packageJson.dependencies,
