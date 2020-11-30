@@ -14,7 +14,7 @@ const prodConfig = {
   output: {
     path: paths.build,
     filename: "[name].[contenthash].js",
-    publicPath: "/marketing/latest/",
+    publicPath: "/container/latest/",
   },
 
   devServer: {
