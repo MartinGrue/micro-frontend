@@ -13,8 +13,8 @@ const prodConfig = {
   mode: "production",
   output: {
     path: paths.build,
-    filename: "[name].bundle.js",
-    publicPath: "/",
+    filename: "[name].[contenthash].js",
+    publicPath: "/container/latest/",
   },
 
   devServer: {
