@@ -1,10 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import { mount } from "marketing/bootstrap";
-
+import { useHistory } from "react-router-dom";
 export default () => {
   const ref = useRef(null);
+  const history = useHistory(); //get the browserhistory
   useEffect(() => {
-  mount(ref.current);
-});
+    const { onParentNavigate } = mount(ref.current, {
+      onNavigate: ({ pathname: nextPathname }) => {
+        const { pathname } = history.location;
+        pathname !== nextPathname && history.push(nextPathname);
+      },
+    });
+    history.listen(onParentNavigate);
+  }, []);
   return <div ref={ref}></div>;
 };
