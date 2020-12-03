@@ -8,9 +8,10 @@ import {
   StylesProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
+import Progress from "./components/Progress";
 
 const marketingLazy = lazy(() => import("./components/MarketingApp"));
-const authLazy = lazy(() => import("./components/AuthApp"));
+const AuthLazy = lazy(() => import("./components/AuthApp"));
 
 const generateClassName = createGenerateClassName({
   productionPrefix: "co",
@@ -22,9 +23,9 @@ export default () => {
       <BrowserRouter>
         <div>
           <Header></Header>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Progress></Progress>}>
             <Switch>
-              <Route path="/auth" component={authLazy}></Route>
+              <Route path="/auth" render={() => (<AuthLazy></AuthLazy>)}></Route>
               <Route path="/" component={marketingLazy}></Route>
             </Switch>
           </Suspense>

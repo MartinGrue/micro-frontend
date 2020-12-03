@@ -6,6 +6,7 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 // Mount function to start up the app
 
 const mount = (el, { onNavigate, browserHistory, initPath }) => {
+  console.log("Marketing is getting loaded");
   const history =
     browserHistory || createMemoryHistory({ initialEntries: [initPath] });
   onNavigate && history.listen(onNavigate); //invoke callback on history change

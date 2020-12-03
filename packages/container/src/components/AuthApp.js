@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect} from "react";
 import { mount } from "auth/bootstrap";
 import { useHistory } from "react-router-dom";
 export default () => {
@@ -12,6 +12,7 @@ export default () => {
       },
       initPath: history.location,
     });
+
     history.listen(onParentNavigate);
   }, []);
   return <div ref={ref}></div>;
