@@ -10,6 +10,7 @@ export default () => {
         const { pathname } = history.location;
         pathname !== nextPathname && history.push(nextPathname);
       },
+      initPath: history.location,
     });
     history.listen(onParentNavigate);
   }, []);
