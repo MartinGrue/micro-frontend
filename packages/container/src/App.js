@@ -1,7 +1,9 @@
 import React from "react";
-import MerketingApp from "./components/MerketingApp";
+import MarketingApp from "./components/MarketingApp";
+import AuthApp from "./components/AuthApp";
+
 import Header from "./components/Header";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
   StylesProvider,
   createGenerateClassName,
@@ -19,7 +21,10 @@ export default () => {
           <Header></Header>
           <h1>Hi There</h1>
           <hr></hr>
-          <MerketingApp />
+          <Switch>
+            <Route path="/auth" component={AuthApp}></Route>
+            {/* <Route path="/" component={MarketingApp}></Route> */}
+          </Switch>
         </div>
       </BrowserRouter>
     </StylesProvider>

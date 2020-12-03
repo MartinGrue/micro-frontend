@@ -1,23 +1,17 @@
 const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const baseConfig = require("./webpack.base");
+const commonConfig = require("./webpack.common");
 const packageJson = require("./package.json");
-const paths = require("./paths");
+const PORT = 1082;
 
 const devConfig = {
-  entry: {
-    main: "./src/index",
-  },
   mode: "development",
   output: {
-    path: paths.build,
-    filename: "[name].bundle.js",
-    publicPath: "/",
+    publicPath: `http://localhost:${PORT}/`,
   },
-
   devServer: {
-    port: 1088,
+    port: PORT,
     historyApiFallback: {
       index: "index.html",
     },
@@ -27,22 +21,15 @@ const devConfig = {
       template: "./public/index.html",
       filename: "index.html", // output file
     }),
-
     new ModuleFederationPlugin({
-      name: "container",
-
+      name: "auth",
       filename: "remoteEntry.js",
-      // library: { type: "var", name: "container" },
-
-      remotes: {
-        marketing: "marketing@http://localhost:1081/remoteEntry.js",
-        auth: "auth@http://localhost:1082/remoteEntry.js",
-
-        // marketing: "marketing",
+      exposes: {
+        "./bootstrap": "./src/bootstrap",
       },
       shared: packageJson.dependencies,
     }),
   ],
 };
 
-module.exports = merge(baseConfig, devConfig);
+module.exports = merge(commonConfig, devConfig);

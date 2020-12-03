@@ -1,17 +1,15 @@
 import React from "react";
-import { Switch, Router, Route} from "react-router-dom";
+import { Switch, Route, Router } from "react-router-dom";
 import {
   StylesProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
 
-import Landing from "./components/Landing";
-import Pricing from "./components/Pricing";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
-//this is needed to avoid css class name collision
-//with other projectes that are using mateial-ui
 const generateClassName = createGenerateClassName({
-  productionPrefix: "ma",
+  productionPrefix: "au",
 });
 
 
@@ -21,8 +19,9 @@ export default ({ history }) => {
       <StylesProvider generateClassName={generateClassName}>
         <Router history={history}>
           <Switch>
-            <Route exact path="/pricing" component={Pricing} />
-            <Route path="/" component={Landing} />
+            <Route path="/auth/signin" component={Signin}></Route>
+            <Route path="/auth/signup" component={Signup}></Route>
+            {/* <Route path="/" component={Home}></Route> */}
           </Switch>
         </Router>
       </StylesProvider>

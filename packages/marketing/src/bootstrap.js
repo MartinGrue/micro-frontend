@@ -22,12 +22,8 @@ const mount = (el, { onNavigate, browserHistory }) => {
 // call mount immediately
 if (process.env.NODE_ENV === "development") {
   const devRoot = document.querySelector("#_marketing-dev-root");
-
-  if (devRoot) {
-    const browserHistory = createBrowserHistory();
-
-    mount(devRoot, { browserHistory });
-  }
+  const browserHistory = createBrowserHistory();
+  devRoot && mount(devRoot, { browserHistory });
 }
 
 // We are running through container
