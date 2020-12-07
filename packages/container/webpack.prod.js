@@ -5,7 +5,7 @@ const baseConfig = require("./webpack.base");
 const packageJson = require("./package.json");
 const paths = require("./paths");
 
-const domain = process.env.PRODUCTION_DOMAIN
+const domain = process.env.PRODUCTION_DOMAIN;
 const prodConfig = {
   entry: {
     main: "./src/index",
@@ -31,12 +31,14 @@ const prodConfig = {
 
     new ModuleFederationPlugin({
       name: "container",
-
       filename: "remoteEntry.js",
       // library: { type: "var", name: "container" },
 
       remotes: {
         marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
+        auth: `auth@${domain}/auth/latest/remoteEntry.js`,
+        dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
+
         // marketing: "marketing",
       },
       shared: packageJson.dependencies,
